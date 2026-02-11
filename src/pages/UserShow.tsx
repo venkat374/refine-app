@@ -1,9 +1,16 @@
 import { useOne, useDelete, useNavigation } from "@refinedev/core";
 import { useParams } from "react-router";
 
-export const UserShow = () => {
+import { Button, Typography } from "antd";
+const { Title, Text } = Typography;
+
+import { Card, Space } from "antd/lib";
+
+const UserShow: React.FC = () => {
+  
   const { id } = useParams();
-  const { query, result } = useOne({
+  
+  const { query } = useOne({
     resource: "users",
     id: id!,
   });
@@ -18,8 +25,6 @@ export const UserShow = () => {
   const user = query.data?.data;
 
   const handleDelete = () => {
-    if (!confirm("Delete this user?")) return;
-
     mutate(
       {
         resource: "users",
@@ -34,22 +39,22 @@ export const UserShow = () => {
   };
 
   return (
-    <div>
-      <h2>User Details</h2>
+    <Card title={<span style={{ color: "white"}}>User Details</span>} style={{ width: 300, backgroundColor : "black"}}>
+      <Space direction="vertical">
+        <Text>Name: {user?.name}</Text>
 
-      <p>
-        <strong>Name:</strong> {user?.name}
-      </p>
-      <p>
-        <strong>Email:</strong> {user?.email}
-      </p>
-      <p>
-        <strong>Location:</strong> {user?.location}
-      </p>
+        <Text> Age: {user?.age}</Text>
 
-      <button onClick={handleDelete}>
-        Delete
-      </button>
-    </div>
+        <Text>Email: {user?.email}</Text>
+        
+        <Text>Gender: {user?.gender}</Text>
+
+        <Text>Location: {user?.location}</Text>
+
+        <Button onClick={handleDelete}>Delete</Button>
+      </Space>
+    </Card>
   );
 };
+
+export default UserShow;

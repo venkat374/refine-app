@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { UploadOutlined, UserOutlined, VideoCameraOutlined, HomeFilled } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import { useNavigation } from '@refinedev/core';
 
@@ -11,6 +11,7 @@ export const PageLayout = () => {
     const { list } = useNavigation();
 
     const menuItems = [
+        { key: 'home', icon: <HomeFilled />, label: 'Home', onClick: () => list("/") },
         { key: 'users', icon: <UserOutlined />, label: 'Users', onClick: () => list("users") },
         { key: 'videos', icon: <VideoCameraOutlined />, label: 'Videos', onClick: () => list("videos") },
         { key: 'uploads', icon: <UploadOutlined />, label: 'Uploads', onClick: () => list("uploads") },
