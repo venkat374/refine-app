@@ -1,43 +1,56 @@
-import { useOne, useUpdate, useNavigation } from "@refinedev/core";
-import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import React from "react";
+import { Edit, useForm } from "@refinedev/antd";
+import { Form, Input, Radio, InputNumber, notification } from "antd";
 
-import type { FormProps } from 'antd';
-import { Button, Form, Input } from 'antd';
+const UserEdit: React.FC = () => {
+  const { formProps, saveButtonProps } = useForm({
+    resource: "users",
+    action: "edit",
+    redirect: "list",
+    mutationMode: "optimistic",
+  });
 
-type FieldType = {
-  name?: string;
-  email?: string;
-};
-
-export const UserEdit = () => {
-  const { id } = useParams();
-  const [form] = Form.useForm
-}
   return (
-    <Form 
-      name="userEdit"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
-    >
-      <Form.Item<FieldType>
-        label="Name"
-        name="name"
+    <Edit saveButtonProps={saveButtonProps} title="Edit User">
+      <Form
+        {...formProps}
+        style={{ maxWidth: 600 }}
+        layout="vertical"
+        variant="filled"
       >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          label="Full Name"
+          name="name"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item<FieldType>
-        label="Email"
-        name="email"
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item label="Age" name="age">
+          <InputNumber style={{ width: "100%" }} />
+        </Form.Item>
 
-      <Button type="primary" onClick={handleSubmit}>
-        Submit
-      </Button>
-    </Form>
+        <Form.Item
+          label="Email Address"
+          name="email"
+          rules={[{ required: true, type: "email" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item label="Gender" name="gender">
+          <Radio.Group>
+            <Radio value="male">Male</Radio>
+            <Radio value="female">Female</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item label="Location" name="location">
+          <Input />
+        </Form.Item>
+      </Form>
+    </Edit>
   );
 };
+
+export default UserEdit;
