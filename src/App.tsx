@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import { dataProvider } from "./providers/refineFirebase/dataProvider";
 import { authProvider } from "./providers/refineFirebase/authProvider";
 import { UserList } from "./pages/UserList";
-import { UserCreate } from "./pages/UserCreate";
+import UserCreate from "./pages/UserCreate";
 import UserEdit from "./pages/UserEdit";
 import UserShow from "./pages/UserShow";
 import HomePage from "./pages/HomePage";

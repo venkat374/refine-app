@@ -13,8 +13,6 @@ export const PageLayout = () => {
     const menuItems = [
         { key: 'home', icon: <HomeFilled />, label: 'Home', onClick: () => list("/") },
         { key: 'users', icon: <UserOutlined />, label: 'Users', onClick: () => list("users") },
-        { key: 'videos', icon: <VideoCameraOutlined />, label: 'Videos', onClick: () => list("videos") },
-        { key: 'uploads', icon: <UploadOutlined />, label: 'Uploads', onClick: () => list("uploads") },
     ];
 
     return (
@@ -27,7 +25,6 @@ export const PageLayout = () => {
                 <Header style={{ padding: 0, background: colorBgContainer }} />
                 <Content style={{ margin: '24px 16px 0' }}>
                     <div style={{ padding: 24, minHeight: 360, background: colorBgContainer, borderRadius: borderRadiusLG }}>
-
                         <Outlet /> 
                     </div>
                 </Content>

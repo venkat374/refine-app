@@ -1,8 +1,6 @@
 import { useList, useNavigation, useDelete } from "@refinedev/core";
 import { Button, Table, Card, Flex, Space } from "antd";
 
-import { Color } from "antd/es/color-picker";
-
 import { Typography } from "antd/lib";
 const { Title, Text } = Typography;
 
@@ -10,8 +8,6 @@ export const UserList = () => {
   const { query, result } = useList({
     resource: "users",
   });
-
-
 
   const { show, edit, create } = useNavigation();
   const { mutate: deleteOne } = useDelete();

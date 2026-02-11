@@ -1,51 +1,61 @@
-import { useCreate, useNavigation } from "@refinedev/core";
-import { useState } from "react";
+import { useForm, Create } from "@refinedev/antd";
 
-export const UserCreate = () => {
-  const { mutate } = useCreate();
-  const { list } = useNavigation();
+import { Radio } from "antd";
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+import {
+  Form,
+  Input,
+  InputNumber,
+} from 'antd';
 
-  const handleSubmit = () => {
-    mutate(
-      {
-        resource: "users",
-        values: {
-          name,
-          email,
-        },
-      },
-      {
-        onSuccess: () => {
-          list("users");
-        },
-      }
-    );
-  };
+const UserCreate = () => {
+  const { formProps, saveButtonProps } = useForm({
+      resource: "users",
+      action: "create",
+      redirect: "list",
+    });
 
   return (
-    <div>
-      <h2>Create User</h2>
+    <Create saveButtonProps={saveButtonProps} title="Create User">
+      <Form
+        {...formProps}
+        style={{ maxWidth: 600 }}
+        layout="vertical"
+        variant="filled"
+      >
+        <Form.Item
+          label="Full Name"
+          name="name"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
 
-      <input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <br />
+        <Form.Item label="Age" name="age">
+          <InputNumber style={{ width: "100%" }} />
+        </Form.Item>
 
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br />
+        <Form.Item
+          label="Email Address"
+          name="email"
+          rules={[{ required: true, type: "email" }]}
+        >
+          <Input />
+        </Form.Item>
 
-      <button onClick={handleSubmit}>
-        Save
-      </button>
-    </div>
+        <Form.Item label="Gender" name="gender">
+          <Radio.Group>
+            <Radio value="male">Male</Radio>
+            <Radio value="female">Female</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item label="Location" name="location">
+          <Input />
+        </Form.Item>
+      </Form>
+    </Create>
   );
 };
+
+export default UserCreate;
