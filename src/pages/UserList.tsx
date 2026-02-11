@@ -4,6 +4,8 @@ import { Button, Table, Card, Flex, Space } from "antd";
 import { Typography } from "antd/lib";
 const { Title, Text } = Typography;
 
+import { useState } from "react";
+
 export const UserList = () => {
   const { query, result } = useList({
     resource: "users",
@@ -11,6 +13,9 @@ export const UserList = () => {
 
   const { show, edit, create } = useNavigation();
   const { mutate: deleteOne } = useDelete();
+
+  const [pageSize, setPageSize] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
   if (query.isLoading) {
     return <div>Loading...</div>;
@@ -30,7 +35,17 @@ export const UserList = () => {
 
       </Flex>
 
-      <Table dataSource={result.data} rowKey="id" pagination={{ pageSize: 10 }}>
+      <Table 
+        dataSource={result.data} rowKey="id" pagination={{ current: currentPage,
+        pageSize: pageSize,
+        pageSizeOptions: ['10', '20', '50', '100'],
+        showSizeChanger: true,
+        onChange: (page, size) => {
+          setCurrentPage(page);
+          setPageSize(size);
+        }
+        }}
+      >
         <Table.Column title="Name" dataIndex="name" render={(text) => <Text strong style={{ color: "white" }}>{text || "-"}</Text>} />
 
         <Table.Column title="Email" dataIndex="email" render={(text) => <Text type="secondary" style={{ color: "white" }}>{text || "-"}</Text>} />

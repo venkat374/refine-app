@@ -9,35 +9,28 @@ const HomePage = () => {
     const { list } = useNavigation();
 
     return (
-        <Space direction="vertical" size="large" style={{ width: '100%' }}>
+        <Card style={{ maxWidth: 600}}>
+            <Space direction="vertical" size="large" style={{ width: '100%' }}>
 
-            <div style={{ marginBottom: '20px' }}>
-                <Title>User Mangement</Title>
-                <Title level={4} type="secondary">The following are some statistics</Title>
-            </div>
+                <div style={{ marginBottom: '20px' }}>
+                    <Title>User Mangement</Title>
+                    <Title level={4} type="secondary">The following are some statistics</Title>
+                </div>
 
-            <Row gutter={6}>
-                <Col span={3}>
-                <Card>
-                    <Statistic 
-                        title="User Count"
-                        value={2}
-                        valueStyle={{ color: 'red' }}
-                    />
-                </Card>
-                </Col>
+                <Row gutter={9}>
+                    <Col span={6}>
+                        <Card>
+                            <Statistic 
+                                title="User Count"
+                                value={2}
+                                valueStyle={{ color: 'red' }}
+                            />
+                        </Card>
+                    </Col>
 
-            </Row>
-
-            <Button 
-                type="default" 
-                size="large" 
-                icon={<UserOutlined />} 
-                onClick={() => list("users")}
-            >
-                View Users
-            </Button>
-        </Space>
+                </Row>
+            </Space>
+        </Card>
     );
 }
 
